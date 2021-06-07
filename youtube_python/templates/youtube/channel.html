@@ -1,0 +1,25 @@
+{% extends 'base.html' %}  
+{% block title %} Youtube{%endblock %} 
+{% block body %}
+{% load static %}
+<div class="container">
+    <div class="row row-cols-auto my-3">
+        
+        {% for video in videos %}
+
+        <div class="col">
+            <a href="/video/{{video.id}}">
+                <video width="300" height="240" controls  poster='/media/videos/21/Screenshot (148).png' preload="none" >
+            <source src="{{video.videofile.url}} " type="video/mp4 "> 
+            </video></a>
+            <h4>{{video.title}}</h4>
+            <span>{{video.user}}<br><span style="color:lightslategray">{{video.datetime}}</span></span>
+        </div>
+
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock %}

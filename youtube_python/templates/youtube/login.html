@@ -1,0 +1,32 @@
+  
+{% extends 'base.html' %} {% block title %} Youtube{% endblock %} {% block body %}
+<center>
+
+
+    {% if not username.is_authenticated %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        log in to upload videos
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %} {% if wrong %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        please enter corret username and password
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    <form method="post" action='/login/'>
+        <h1>Log In!</h1>
+        {% csrf_token %}
+        <table>
+            {{form}}
+        </table>
+        <br>
+        <button type="submit" class="btn btn-outline-success my-2">log in</button>
+
+    </form>
+
+    <p>Create a new account <a style="color:blue" href="/register/">Register here</a></p>
+
+</center>
+
+{% endblock %}

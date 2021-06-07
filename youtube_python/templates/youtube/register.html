@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block title %} 
+Youtube{% endblock %}
+ {% block body %}
+ <center>
+ <form method="post" action='/register/'>
+<h1>Sign Up</h1>
+{% csrf_token %} 
+<table>
+    {{form}}
+    </table>
+    <br>
+<button type="submit" class="btn btn-outline-success my-2">Sign Up</button>
+
+</form>
+<p>Already have an account <a style="color:blue" href="/login/">Log In</a></p>
+
+</center>
+{% endblock %}

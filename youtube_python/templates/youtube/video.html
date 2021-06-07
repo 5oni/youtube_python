@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block title %} Youtube{% endblock %} {% block body %}
+
+<div class="row mx-2 my-3 ">
+<div class="col-8">
+    <video width=100% height="700" controls poster='/media/videos/21/Screenshot (148).png' preload="none">
+        <source src="/media/{{video_path}}" type="video/mp4">
+        
+        Your browser does not support the video tag.
+      </video>
+    <h3>{{video.title}}</h3>
+    <div class="row">
+    <div class="col-8">
+    <span style="color:lightslategray">{{video.datetime.date}}</span><br><br>
+    </div>
+    <div class="col">
+        <form>
+        {% if is_liked %}
+        <button style="font-size:20px" formaction="/like/11/{{video.id}}"><i class="fa fa-thumbs-up btn btn-primary"></i></button>
+        {% else %}
+        <button style="font-size:20px" formaction="/like/10/{{video.id}}"><i class="fa fa-thumbs-up"></i></button>
+        {% endif %}<span><b>{{video.total_likes}}</b></span>
+        {% if is_disliked %}
+        <button style="font-size:20px" formaction="/like/01/{{video.id}}"><i class="fa fa-thumbs-up btn btn-primary"></i></button>
+        {% else %}
+        <button style="font-size:20px" formaction="/like/12/{{video.id}}"><i class="fa fa-thumbs-up"></i></button>
+        {% endif %}
+
+        <span><b>{{video.total_dislikes}}</b></span>
+        <button style="font-size:20px" formaction="/"><i class="fa fa-share"></i></button>
+        </form>
+        
+        
+    </div>
+    </div><hr>
+    <div class="row">
+        <div class="col-8">
+            <h2>{{video.user}}</h2>
+            <p><b>{{total_subs}}  subscribers</b></p>
+        </div>
+        <div class="col-2">
+            <form method="post" action="/sub/{{video.id}}/{{video.user.id}}/">
+                {% csrf_token %}
+                {% if is_subscribed %}
+                    <button type="submit" class="btn btn-dark" >SUBSCRIBED</button> 
+                {% else %}
+                    <button type="submit" class="btn btn-danger">SUBSCRIBE</button>
+                {% endif %}
+                
+            </form>
+        </div>
+    </div> 
+    <p>{{video.desc}}</p>
+    <hr>
+    <h4>{{comments|length}} Comments</h4>
+    {% if username.is_authenticated %}
+    <form action="/video/{{video.id}}/" method="post">
+        {% csrf_token %} {{form}}
+        <br>
+        <button type="submit" class="btn btn-outline-success my-2">Post Commnent </button>
+    </form>
+    {% endif %}
+    <h2>Comments</h2>
+    <ul class="list-group">
+        {% for comment in comments %}
+        <p><b>{{comment.user}}</b> <span style="color:lightslategray">{{comment.datetime.date}}</span><br> {{comment.text}}
+            <br></p>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="col-4">
+    <h2>Recommendations</h2>
+    
+    {% for video in recommendations %}
+    <div class="row">   
+    <div class="col-6" style="height:100px;width:150px">
+        <a href="/video/{{video.id}}">
+            <video width=100% height=100% poster='/media/videos/21/Screenshot (148).png' preload="none">
+        <source src="{{video.videofile.url}} " type="video/mp4" > 
+        </video></a>
+        </div>
+    <div class="col-6">
+        <h5>{{video.title}}</h5>
+        <p><span style="color:lightslategray">{{video.datetime.date}}</span></p>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

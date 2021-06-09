@@ -1,3 +1,4 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render,redirect
 from .forms import loginView,registerView,NewVideo,CommentForm
 from django.views.generic.base import View ,HttpResponse
@@ -15,10 +16,19 @@ def home(request):
 class Homeview(View):
     template1="youtube/index.html"
     most_recent_videos=Video.objects.all()
+    print(most_recent_videos)
     # most_recent_videos=[]
     def get(self,request):
-        # print(request.user)
         username=request.user
+        # my_sub_videos=[]
+        # if username.is_authenticated:
+        #     channel=Channel.objects.get(user=username)
+        #     my_subs=channel.my_sub_channels.all()
+        #     for i in my_subs:
+        #         my_sub_videos=Video.objects.filter(user=i)
+
+        #         self.most_recent_videos=self.most_recent_videos+my_sub_videos
+        
         return render(request,self.template1,{'username':username,'most_recent_videos':self.most_recent_videos})
    
 
@@ -195,14 +205,38 @@ class subview(View):
     template_name ="youtube/video.html"
     def post(self, request,Vid,id):
         if request.user.is_authenticated:
+            video_user=Video.objects.get(id=Vid).user
+            print(video_user)
             channel=Channel.objects.get(user_id=id)
+            my_channel=Channel.objects.get(user_id=request.user.id)
+            print(my_channel,channel)
             if channel.subs.filter(username=request.user).exists():
                 channel.subs.remove(request.user)
+                my_channel.my_sub_channels.remove(video_user)
             else:
                 channel.subs.add(request.user)
+                my_channel.my_sub_channels.add(video_user)
             return redirect("/video/{}/".format(Vid))
         else:
             return redirect("/login")
+    
 
+
+
+class subscribtions_View(View):
+    template_name="youtube/subscription.html"
+    def get(self, request):
+        username = request.user
+        channel=Channel.objects.get(user=username)
+        my_subs=channel.my_sub_channels.all()
+        my_sub_videos=[]
+        for i in my_subs:
+            sub_videos=Video.objects.filter(user=i)
+            for j in sub_videos:
+                my_sub_videos.append(j)
+        print(my_sub_videos)
+        return render(request,self.template_name,{'username':username,'my_sub_videos':my_sub_videos})
+
+        
 
 

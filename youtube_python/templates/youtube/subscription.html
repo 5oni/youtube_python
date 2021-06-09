@@ -4,11 +4,9 @@
 {% load static %}
 <div class="container">
     <div class="row row-cols-auto my-3">
-        
-        {% for video in most_recent_videos %}
-
+        {% for video in my_sub_videos %}
         <div class="col">
-            <a href="video/{{video.id}}">
+            <a href="/video/{{video.id}}">
                 <video width="300" height="240" controls  poster='/media/videos/21/Screenshot (148).png' preload="none" >
             <source src="{{video.videofile.url}} " type="video/mp4 "> 
             </video></a>
@@ -20,6 +18,4 @@
     </div>
 
 </div>
-
-
 {% endblock %}

@@ -2,7 +2,7 @@
 
 <div class="row mx-2 my-3 ">
 <div class="col-8">
-    <video width=100% height="700" controls poster='/media/videos/21/Screenshot (148).png' preload="none">
+    <video width=100% height=100% controls poster='/media/videos/21/Screenshot (148).png' preload="none">
         <source src="/media/{{video_path}}" type="video/mp4">
         
         Your browser does not support the video tag.
@@ -16,17 +16,17 @@
         <form>
         {% if is_liked %}
         <button style="font-size:20px" formaction="/like/11/{{video.id}}"><i class="fa fa-thumbs-up btn btn-primary"></i></button>
-        {% else %}
+            {% else %}
         <button style="font-size:20px" formaction="/like/10/{{video.id}}"><i class="fa fa-thumbs-up"></i></button>
-        {% endif %}<span><b>{{video.total_likes}}</b></span>
-        {% if is_disliked %}
+            {% endif %}
+            <span><b>{{video.total_likes}}</b></span>
+            {% if is_disliked %}
         <button style="font-size:20px" formaction="/like/01/{{video.id}}"><i class="fa fa-thumbs-up btn btn-primary"></i></button>
-        {% else %}
+            {% else %}
         <button style="font-size:20px" formaction="/like/12/{{video.id}}"><i class="fa fa-thumbs-up"></i></button>
         {% endif %}
-
-        <span><b>{{video.total_dislikes}}</b></span>
-        <button style="font-size:20px" formaction="/"><i class="fa fa-share"></i></button>
+            <span><b>{{video.total_dislikes}}</b></span>
+            <button style="font-size:20px" formaction="/"><i class="fa fa-share"></i></button>
         </form>
         
         

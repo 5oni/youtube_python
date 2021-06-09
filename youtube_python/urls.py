@@ -1,5 +1,5 @@
 
-from youtube.views import Homeview,newvideo,loginview,registerview,ChannelView,LogoutView,VideoView,LorDView,subview
+from youtube.views import Homeview,newvideo,loginview,registerview,ChannelView,LogoutView,VideoView,LorDView,subview,subscribtions_View
 from django.contrib import admin
 from django.urls import path
 from youtube import views
@@ -15,6 +15,7 @@ urlpatterns = [
     path('login/',loginview.as_view()),
     path('register/',registerview.as_view()),
     path('logout/',LogoutView.as_view()),
+    path('subscribtions/',subscribtions_View.as_view()),
     path('video/<int:id>/',VideoView.as_view()),
     path('channel/',ChannelView.as_view()),
     path('sub/<int:Vid>/<int:id>/',subview.as_view()),

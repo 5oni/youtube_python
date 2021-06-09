@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 # # appname ="youtube"
 class Channel(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
-    subs = models.ManyToManyField(User, blank=True, null=True, related_name="subs")
+    subs = models.ManyToManyField(User, blank=True,related_name="subs")
+    my_sub_channels = models.ManyToManyField(User, blank=True,related_name="my_sub_channels")
     def total_subs(self):
         return self.subs.count() 
 class Video(models.Model):

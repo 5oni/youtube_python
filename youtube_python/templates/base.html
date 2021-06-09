@@ -38,6 +38,9 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    {% if username.is_authenticated %}
+                        <a class="nav-link" href="/subscribtions/">Subscriptions</a> 
+                    {% endif %}
                     <a class="nav-link" href="/newvideo/">New Video</a> {% if username.is_authenticated %}
                     <a class="nav-link" href="/logout/">log Out</a> {% else %}
                     <a class="nav-link" href="/login/">Sign In</a>

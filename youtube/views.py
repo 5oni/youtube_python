@@ -1,34 +1,24 @@
-from django.db.models.query import QuerySet
 from django.shortcuts import render,redirect
 from .forms import loginView,registerView,NewVideo,CommentForm
 from django.views.generic.base import View ,HttpResponse
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from .models import  Video,Comment,Channel
 import random,string
 from django.db.models import F
-def home(request):
-    return render(request,"base.html")
 
 
+from django.contrib.auth import get_user_model
+from django_email_verification import send_email
+import time
 class Homeview(View):
     template1="youtube/index.html"
     most_recent_videos=Video.objects.all()
-    print(most_recent_videos)
-    # most_recent_videos=[]
     def get(self,request):
-        username=request.user
-        # my_sub_videos=[]
-        # if username.is_authenticated:
-        #     channel=Channel.objects.get(user=username)
-        #     my_subs=channel.my_sub_channels.all()
-        #     for i in my_subs:
-        #         my_sub_videos=Video.objects.filter(user=i)
-
-        #         self.most_recent_videos=self.most_recent_videos+my_sub_videos
-        
+        username=request.user    
         return render(request,self.template1,{'username':username,'most_recent_videos':self.most_recent_videos})
    
 
@@ -60,23 +50,25 @@ class registerview(View):
     def post(self,request):
         form=registerView(request.POST)
         if form.is_valid():
+            print("YES")
             username=form.cleaned_data["username"]
             password=form.cleaned_data["password"]
             email=form.cleaned_data["email"]
-            new_user=User(username=username,email=email)
+            
+            new_user=get_user_model().objects.create(username=username,email=email)
             new_user.set_password(password)
+            new_user.is_active = False
+            send_email(new_user)
             try:
-                new_user.save()
                 channel=Channel(user=new_user)
                 channel.save()
-                send_mail(subject="check",message="Success !",from_email=None,recipient_list=[email,])
+                # send_mail(subject="check",message="Success !",from_email=None,recipient_list=[email,])
             except:
                 print("error h bhai")
                 return redirect('/register/')
-
             return redirect('/login/')
-            # return HttpResponse("<h2>register view</h2>")
-        # return render(request.loginview.template_name)
+        
+            
     
 class newvideo(View):
     template1="youtube/new_video.html"

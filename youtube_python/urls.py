@@ -1,12 +1,12 @@
 
 from youtube.views import Homeview,newvideo,loginview,registerview,ChannelView,LogoutView,VideoView,LorDView,subview,subscribtions_View
 from django.contrib import admin
-from django.urls import path
 from youtube import views
 import debug_toolbar
 from django.conf import settings
 from django.urls import include, path
 from django.conf.urls.static import static
+from django_email_verification import urls as email_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -20,6 +20,7 @@ urlpatterns = [
     path('channel/',ChannelView.as_view()),
     path('sub/<int:Vid>/<int:id>/',subview.as_view()),
     path('like/<int:lord>/<int:id>/',LorDView.as_view()),
+    path('email/', include(email_urls)),	
     path('__debug__/', include(debug_toolbar.urls)),
 ]
 if settings.DEBUG:

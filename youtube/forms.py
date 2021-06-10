@@ -9,7 +9,7 @@ class loginView(forms.Form):
 class registerView(forms.Form):
     username = forms.CharField(label="username" ,max_length=30)
     password = forms.CharField(label="password" ,max_length=30)
-    email= forms.CharField(label="email" ,max_length=50)
+    email= forms.EmailField(max_length=254)
 
 class NewVideo(forms.ModelForm):
     class Meta:

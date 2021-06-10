@@ -1,12 +1,12 @@
 {% extends 'base.html' %} {% block title %} 
 Youtube{% endblock %}
- {% block body %}
+ {% block body %}{% load crispy_forms_tags %}
  <center>
  <form method="post" action='/register/'>
 <h1>Sign Up</h1>
 {% csrf_token %} 
 <table>
-    {{form}}
+    {{form |crispy}}
     </table>
     <br>
 <button type="submit" class="btn btn-outline-success my-2">Sign Up</button>

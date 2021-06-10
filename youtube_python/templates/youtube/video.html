@@ -21,9 +21,9 @@
             {% endif %}
             <span><b>{{video.total_likes}}</b></span>
             {% if is_disliked %}
-        <button style="font-size:20px" formaction="/like/01/{{video.id}}"><i class="fa fa-thumbs-up btn btn-primary"></i></button>
+        <button style="font-size:20px" formaction="/like/01/{{video.id}}"><i class="fa fa-thumbs-down btn btn-primary"></i></button>
             {% else %}
-        <button style="font-size:20px" formaction="/like/12/{{video.id}}"><i class="fa fa-thumbs-up"></i></button>
+        <button style="font-size:20px" formaction="/like/12/{{video.id}}"><i class="fa fa-thumbs-down"></i></button>
         {% endif %}
             <span><b>{{video.total_dislikes}}</b></span>
             <button style="font-size:20px" formaction="/"><i class="fa fa-share"></i></button>
@@ -54,7 +54,7 @@
     <h4>{{comments|length}} Comments</h4>
     {% if username.is_authenticated %}
     <form action="/video/{{video.id}}/" method="post">
-        {% csrf_token %} {{form}}
+        {% csrf_token %} {{form }}
         <br>
         <button type="submit" class="btn btn-outline-success my-2">Post Commnent </button>
     </form>

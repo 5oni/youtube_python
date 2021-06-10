@@ -1,5 +1,5 @@
   
-{% extends 'base.html' %} {% block title %} Youtube{% endblock %} {% block body %}
+{% extends 'base.html' %} {% block title %} Youtube{% endblock %} {% block body %}{% load crispy_forms_tags %}
 <center>
 
 
@@ -18,7 +18,7 @@
         <h1>Log In!</h1>
         {% csrf_token %}
         <table>
-            {{form}}
+            {{form |crispy}}
         </table>
         <br>
         <button type="submit" class="btn btn-outline-success my-2">log in</button>

@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "verify_email.apps.VerifyEmailConfig",
+    'crispy_forms',
     'debug_toolbar',
     
 ]
@@ -108,15 +110,33 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+# ==================email verificaation setting ================
+def verified_callback(user):
+    user.is_active = True
+
+
+EMAIL_VERIFIED_CALLBACK = verified_callback
+EMAIL_FROM_ADDRESS = 'noreply@aliasaddress.com'
+EMAIL_MAIL_SUBJECT = 'Confirm your email'
+EMAIL_MAIL_HTML = 'email_verify/mail_body.html'
+EMAIL_MAIL_PLAIN = 'email_verify/mail_body.txt'
+EMAIL_TOKEN_LIFE = 60 * 60
+EMAIL_PAGE_TEMPLATE = 'email_verify/confirm.html'
+EMAIL_PAGE_DOMAIN = 'http://127.0.0.1:8000/'
+
+# For Django Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'sunilsoni10220001022000@gmail.com'
-EMAIL_HOST_PASSWORD = 'Sunil1022000'
+EMAIL_HOST_PASSWORD = 'Sunil1022000'  # os.environ['password_key'] suggested
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT= os.path.join(BASE_DIR, 'static/')

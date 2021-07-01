@@ -1,6 +1,7 @@
 
 from pathlib import Path
 import os
+import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -142,3 +143,15 @@ STATIC_URL = '/static/'
 STATIC_ROOT= os.path.join(BASE_DIR, 'static/')
 MEDIA_URL= "/media/"
 MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
+
+
+
+
+
+
+
+
+
+
+
+django_heroku.settings(locals())

@@ -2,7 +2,7 @@
 from youtube.views import Homeview,newvideo,loginview,registerview,ChannelView,LogoutView,VideoView,LorDView,subview,subscribtions_View
 from django.contrib import admin
 from youtube import views
-import debug_toolbar
+
 from django.conf import settings
 from django.urls import include, path
 from django.conf.urls.static import static
@@ -21,7 +21,7 @@ urlpatterns = [
     path('sub/<int:Vid>/<int:id>/',subview.as_view()),
     path('like/<int:lord>/<int:id>/',LorDView.as_view()),
     path('email/', include(email_urls)),	
-    path('__debug__/', include(debug_toolbar.urls)),
+    
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

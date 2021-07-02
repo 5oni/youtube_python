@@ -36,7 +36,9 @@ class loginview(View):
             password=form.cleaned_data["password"]
             print("In form",username,password)
             user = authenticate(request, username=username, password=password)
+            print(user)
             if user is not None:
+                print("in user")
                 login(request, user)
                 return redirect('/')     
         form=loginView()

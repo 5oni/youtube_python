@@ -34,6 +34,7 @@ class loginview(View):
             username=form.cleaned_data["username"]
             password=form.cleaned_data["password"]
             user = authenticate(request, username=username, password=password)
+            
             if user is not None:
                 login(request, user)
                 return redirect('/')     
@@ -57,7 +58,7 @@ class registerview(View):
             
             new_user=get_user_model().objects.create(username=username,email=email)
             new_user.set_password(password)
-            new_user.is_active = False
+            
             send_email(new_user)
             try:
                 channel=Channel(user=new_user)

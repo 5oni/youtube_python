@@ -15,7 +15,7 @@ SECRET_KEY = 'jt$_mjj&(+!et*kypu-^(9pt@xc+(_55fw4n=*@$kgmu$c1got'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["sonivideo.herokuapp.com"]
 
 
 # Application definition
@@ -104,6 +104,7 @@ AUTH_PASSWORD_VALIDATORS = [
 INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
+    "sonivideo.herokuapp.com",
 ]
 LANGUAGE_CODE = 'en-us'
 

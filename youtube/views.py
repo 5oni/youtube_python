@@ -30,12 +30,19 @@ class loginview(View):
         return render(request,self.template_name,{'form':form})
     def post(self,request):
         form=loginView(request.POST)
+        print("going in")
         if form.is_valid():
             username=form.cleaned_data["username"]
             password=form.cleaned_data["password"]
+            print("In form",username,password)
             user = authenticate(request, username=username, password=password)
+<<<<<<< HEAD
             
+=======
+            print(user)
+>>>>>>> 2ca334080705d633157f5edb4c832752dc4effee
             if user is not None:
+                print("in user")
                 login(request, user)
                 return redirect('/')     
         form=loginView()

@@ -10,11 +10,11 @@
                 <video width="300" height="240" controls  poster='/media/videos/21/Screenshot (148).png' preload="none" >
             <source src="{{video.videofile.url}} " type="video/mp4 "> 
             </video></a>
-            <h4>{{video.title}}</h4>
-            <span>{{video.user}}<br><span style="color:lightslategray">{{video.datetime}}</span></span>
+            <h6>{{video.title}}<br>
+                <span>{{video.user}}<br><span style="color:lightslategray">{{video.datetime}}</span></span>
+            </h6>
         </div>
         {% endfor %}
     </div>
-
 </div>
 {% endblock %}

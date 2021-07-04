@@ -16,6 +16,7 @@ from django_email_verification import send_email
 import time
 class Homeview(View):
     template1="youtube/index.html"
+
     most_recent_videos=Video.objects.all().order_by("-datetime")
     print(most_recent_videos)
     def get(self,request):

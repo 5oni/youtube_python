@@ -16,12 +16,12 @@ from django_email_verification import send_email
 import time
 class Homeview(View):
     template1="youtube/index.html"
-
-    most_recent_videos=Video.objects.all().order_by("-datetime")
-    print(most_recent_videos)
+    
+    # print(most_recent_videos)
     def get(self,request):
+        most_recent_videos=Video.objects.all().order_by("-datetime")
         username=request.user    
-        return render(request,self.template1,{'username':username,'most_recent_videos':self.most_recent_videos})
+        return render(request,self.template1,{'username':username,'most_recent_videos':most_recent_videos})
    
 
 
@@ -29,6 +29,7 @@ class loginview(View):
     template_name="youtube/login.html"
     def get(self,request):
         form=loginView()
+        print(form)
         return render(request,self.template_name,{'form':form})
     def post(self,request):
         form=loginView(request.POST)

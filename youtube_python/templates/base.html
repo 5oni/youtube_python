@@ -25,6 +25,24 @@
             span{
                 font-size: 0.875em;
                 }
+                
+            * {
+                font-family: Absinette;
+                color: white;
+             }
+            .formclass{
+                /* color: black; */
+                background-color: black;
+                
+            }
+            body{
+                
+                background-color: black;
+            }
+            .vl {
+                    border-left: 1pt solid rgb(63, 61, 61);
+                    height: 750px;
+                }
         
         </style>
     <title>{% block title %}{% endblock %} </title>
@@ -53,8 +71,8 @@
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="dropdownMenuClickable">
                             <li><a href="#">{{username}}</a></li>
                             
-                            <li><a href="/channel">Your channel</a></li>
-                            <li><a href="/logout">Sign Out</a></li>
+                            <li><a href="/channel/">Your channel</a></li>
+                            <li><a href="/logout/">Sign Out</a></li>
 
                         </ul>
                     </div>

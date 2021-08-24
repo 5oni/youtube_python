@@ -70,16 +70,10 @@ WSGI_APPLICATION = 'youtube_python.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd326vt2vu9e3l2',
-        'USER': 'xzxpobellrcfpe',
-        'PASSWORD': '0a00889b2f6455385b3bf663ae708af591ec64978109a262aa2f0a98b4b2c755',
-        'HOST': 'ec2-34-228-100-83.compute-1.amazonaws.com',
-        'PORT': '5432',
-
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -159,14 +153,14 @@ MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
 
 
 # <<<<<<< HEAD
-# ON_HEROKU = 'ON_HEROKU' in os.environ
-# if ON_HEROKU:
-#     django_heroku.settings(locals())
-#     import dj_database_url
-#     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# =======
+ON_HEROKU = 'ON_HEROKU' in os.environ
+if ON_HEROKU:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
-# # django_heroku.settings(locals())
+
+# # 
 # # import dj_database_url
 # # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# >>>>>>> 45bcb157615dfe09df6ecd01714001e5714f9d5c
+
+django_heroku.settings(locals())

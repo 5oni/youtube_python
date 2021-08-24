@@ -3,9 +3,9 @@
  {% load crispy_forms_tags %}
     <center>
         <!-- <table class="table "> -->
-
-    <form enctype="multipart/form-data"   action="/newvideo/" method="post">
-        <h1>Add new video</h1>
+            <h1>Add new video</h1>
+    <form class="formclass" enctype="multipart/form-data"  action="/newvideo/" method="post" >
+        
         {% csrf_token %}
       
         {{form |crispy}}
